@@ -1,0 +1,53 @@
+=== The mission ===
+To build a small command line tool that parses a "prn" file and output simple stats
+
+=== What is PRN? ===
+PRN is a fixed width file format for books. It has 3 fields:
+Title - always 40 characters, 
+Author- always 30 characters, 
+ISBN - between 5 to 13 characters
+
+For example:
+Little Women                            Alcott,Louisa May             9781402714580
+is the record for Louisa May Alcott's book "Little Women" which has ISBN 9781402714580
+
+If any of the values is too long to fit in a field, then it is continued in the following line.
+This is denoted by ending the relevant field with "..."
+For example:
+The Life and Adventures of Nicholas N...Dickens,Charles               9780140435122
+ickleby                                                               
+is the record for the Charles Dickens novel "The Life and Adventures of Nicholas Nickleby"
+As you can see, the continue line has empty values for parts that are not continues - in this case the author name and ISBN.
+
+Here is another example:
+The Day of the Triffids                 Wyndham,John Parkes Lucas B...9780812967128
+                                        eynon Harris
+
+Note that author names are always formatted as "Last, Other", e.g. "de Saint-Exupery,Antoine" for "Antoine de Saint-Exupery" and "Dick,Philip K." for "Philip K. Dick"
+You can assume there is always 1 comma exactly in the author name. It is part of the format.
+
+When a book has more than one author, then the author name parts are separated by a slash, e.g. "Moore/Gibbons,Alan/David" for Alan Moore and David Gibbons.
+
+=== In this zip file ===
+The attached zip file contains a working maven project that creates a self-executable jar called "solution.jar"
+The main class is "com.develeap.prn.Main", which at this stage does next to nothing.
+To build the jar you need to run "maven package" (or use eclipse/intellij)
+
+There is also a sample prn file for you to test your code. 
+Your program will be tested on a different file, of course.
+
+=== The task ===
+Your task is to modify the project so that it accepts the name of a PRN file and outputs the following statistics:
+(1) How many books are listed in the file
+(2) How many authors are listen in the file
+(3) list the 3 authors with the most books
+
+For example:
+> java -jar target/solution.jar ISBNs_sample.prn
+There are 21 books and 11 authors in this file.
+The most productive authors are:
+ - Dickens,Charles(4 titles)
+ - Allain,Marcel(4 titles)
+ - Amis,Kingsley(3 titles)
+
+ Good luck!
